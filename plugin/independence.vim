@@ -28,10 +28,9 @@ endif
 let g:loaded_independence=1
 
 " Section: Event group setup
-" Log creating, opening and writing files
-augroup ActivityLog
-	au BufNewFile * call s:LoadConfig()
-	au BufReadPre * call s:LoadConfig()
+" Act when creating or loading a file
+augroup Independence
+	au BufNewFile,BufReadPre * call s:LoadConfig()
 augroup END
 
 " Section: Script variables
