@@ -30,7 +30,7 @@ let g:loaded_independence=1
 " Section: Event group setup
 " Act when creating or loading a file
 augroup Independence
-	au BufNewFile,BufReadPre * call s:LoadConfig()
+	au BufNewFile,BufRead * call s:LoadConfig()
 augroup END
 
 " Section: Script variables
@@ -52,7 +52,6 @@ function s:LoadConfig()
 	let l:root = system('cd ' . fnameescape(expand("%:h")) . "; echo -n `git rev-parse --show-toplevel`")
 	let l:configFile = l:root . '/.vimrc'
 	if filereadable(l:configFile)
-		echom "Loading " . l:configFile
 		exec ":source " . l:configFile
 	endif
 endfunction
