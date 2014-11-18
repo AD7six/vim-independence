@@ -3,7 +3,7 @@
 " """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Authors:      Andy Dawson <andydawson76 AT gmail DOT com>
-" Version:      0.1.0
+" Version:      0.2.0
 " Licence:      http://www.opensource.org/licenses/mit-license.php
 "               The MIT License
 " URL:          http://github.com/AD7six/vim-independence
@@ -49,11 +49,31 @@ function s:LoadConfig()
 		return
 	endif
 
-	let l:root = system('cd ' . fnameescape(expand("%:h")) . "; echo -n `git rev-parse --show-toplevel`")
-	let l:configFile = l:root . '/.vimrc'
-	if filereadable(l:configFile)
-		exec ":source " . l:configFile
+	let l:root   = system('cd ' . fnameescape(expand("%:h")) . "; echo -n `git rev-parse --show-toplevel`")
+	let l:query  = '%:p:h'
+	let l:maybe  = ''
+	let l:toload = []
+
+	" Make sure that we're *IN* a Git project
+	if ! isdirectory(l:root)
+		return
 	endif
+
+	" Find all of the .vimrc files from bottom-up
+	while l:maybe != l:root
+		let l:maybe = fnameescape(expand(l:query))
+		let l:query = l:query . ':h'
+
+		let l:vimrc = l:maybe . '/.vimrc'
+		if filereadable(l:vimrc)
+			call add(l:toload, l:vimrc)
+		endif
+	endwhile
+
+	" Load all the .vimrc files from top-down
+	for l:vimrc in reverse(l:toload)
+		exec ":source " . l:vimrc
+	endfor
 endfunction
 
 " Section: Plugin completion
