@@ -16,7 +16,8 @@ Alternatively - simply put the file independence.vim in your plugin folder direc
 
 # Usage
 
-The plugin is automatic, if `.vimrc` files exist in your git project, they will be loaded
+The plugin is automatic; it will look for and load all `.vimrc` files found from the git project
+root to the buffer's folder.  When not in a git project, no action is taken.
 
 For example, let's consider that you use the [Syntastic](https://github.com/scrooloose/syntastic)
 plugin, and most of your projects are php. The default standard for syntastic to check code against
@@ -45,4 +46,4 @@ As you may deduce from the above example, if you modify a global variable in a p
 
 * 0.1.0 Intial release
 
-* 0.2.0 Load all ".vimrc" files from the buffer all the way up to the git project root
+* 0.2.0 Load all ".vimrc" files from the git project root down to the buffer's folder
