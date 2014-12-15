@@ -9,7 +9,7 @@ I recommend using [Vim Pathogen](https://github.com/tpope/vim-pathogen)
 
 Therefore:
 
-	cd .vim/bundles
+	cd .vim/bundle
 	git clone git://github.com/AD7six/vim-independence.git
 
 Alternatively - simply put the file independence.vim in your plugin folder directly
