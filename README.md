@@ -1,4 +1,4 @@
-Vim Independence
+Vim Independence #ARCHIVED#
 ================
 
 This vim plugin allows you to load (git) project specific .vimrc files
